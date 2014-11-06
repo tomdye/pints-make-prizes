@@ -10,15 +10,17 @@ window.addEventListener('push', () => {
 	if (subjectMatch) {
 		currentSubjectIndex = subjectMatch[1];
 	}
-	if (false) {
-		var wordSolver = new WordSolver(currentSubjectIndex, currentWordCount);
-		wordSolver.start();
-	}
 });
 
 var main = document.getElementById("main");
 var dataLoader = new DataLoader(subjects);
 dataLoader.start().then((subjects) => {
+	var aTeamSubject = subjects[0];
+	var wordSolver = new WordSolver(aTeamSubject.words, 4);
+	wordSolver.start();
+window.wordSolver = wordSolver;
+
+
 	subjects.forEach((subject, i) => {
 		var li = document.createElement("li");
 		li.classList.add("table-view-cell");
